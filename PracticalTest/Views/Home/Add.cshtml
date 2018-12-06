@@ -1,0 +1,66 @@
+﻿@using PracticalTest.Models
+@model EmployeeModel
+@{
+    ViewBag.Title = "Add";
+}
+
+
+<h2>Employee Form</h2>
+
+<div class="row">
+    @using (Html.BeginForm("Add", "Home", FormMethod.Post))
+    {
+    <div>
+        <div>
+            <label>Name</label>
+        </div>
+        <div>
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @maxlength = "100" })
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <div>
+            <label>Surname</label>
+        </div>
+        <div>
+            @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", @maxlength = "100" })
+            @Html.ValidationMessageFor(model => model.Surname)
+        </div>
+        <div>
+            <label>Address</label>
+        </div>
+        <div>
+            @Html.TextAreaFor(model => model.Address, new { @class = "form-control", @maxlength = "250" })
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+        <div>
+            <label>Qualification</label>
+        </div>
+        <div>
+            @Html.TextBoxFor(model => model.Qualification, new { @class = "form-control", @maxlength = "20" })
+            @Html.ValidationMessageFor(model => model.Qualification)
+        </div>
+        <div>
+            <label>Contact Number</label>
+        </div>
+        <div>
+            @Html.TextBoxFor(model => model.ContactNumber, new { @class = "form-control", @maxlength = "10" })
+            @Html.ValidationMessageFor(model => model.ContactNumber)
+        </div>
+        <div>
+            <label>Department</label>
+        </div>
+        <div>
+            @Html.DropDownListFor(model => model.DepartmentId, CommonList.DepartmentList(), "Select Department", new { @class = "form-control select2",@multiple= "multiple" })
+            @Html.ValidationMessageFor(model => model.DepartmentId)
+        </div>
+           <div>
+               @Html.ActionLink("Add New Department","Department",new {@class="btn btn-default" })
+           </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <input type="reset" value="Cancel" class="btn btn-warning" />
+    </div>
+    }
+</div>

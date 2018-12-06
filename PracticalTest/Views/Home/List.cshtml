@@ -1,0 +1,63 @@
+﻿@model List<PracticalTest.Models.EmployeeModel>
+
+@{
+    ViewBag.Title = "List";
+}
+
+
+<div>
+    <br />
+    <div>
+        @Html.ActionLink("Add New Employee","Add",null,new {@class="btn btn-success" })
+    </div>
+    <br />
+    @if (Model != null && Model.Count>0)
+    {
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Surname / Name</th>
+                <th>Address</th>
+                <th>Qualification</th>
+                <th>Contact Number</th>
+                <th>Department</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Surname+" "+ @item.Name
+                    </td>
+                    <td>
+                        @item.Address
+                    </td>
+                    <td>
+                        @item.Qualification
+                    </td>
+                    <td>
+                        @item.ContactNumber
+                    </td>
+                    <td>
+                        @item.DepartmentId
+                </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Add", new { id = item.EmployeeId }) |
+                        <a href="@Url.Action("Delete", new { id = item.EmployeeId })" onclick="if (confirm('Do you want to delete selected employee?')){return true;}else{event.stopPropagation(); event.preventDefault();};" >
+                            Delete
+                        </a>
+                        
+                    </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    }
+    else {
+    <div>
+        <span>No record(s) found.</span>
+    </div>
+    }</div>
+

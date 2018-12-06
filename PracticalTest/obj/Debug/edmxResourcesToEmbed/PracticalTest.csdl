@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Anant_TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DepartmentMaster">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentName" Type="String" MaxLength="100" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="EmployeeDepartments" Relationship="Anant_TestModel.FK_EmployeeDepartment_DepartmentMaster" FromRole="DepartmentMaster" ToRole="EmployeeDepartment" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="100" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Qualification" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="ContactNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="EmployeeDepartments" Relationship="Anant_TestModel.FK_EmployeeDepartment_Employee_EmployeeId" FromRole="Employee" ToRole="EmployeeDepartment" />
+  </EntityType>
+  <EntityContainer Name="PracticalTestEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DepartmentMasters" EntityType="Self.DepartmentMaster" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="EmployeeDepartments" EntityType="Anant_TestModel.EmployeeDepartment" />
+    <AssociationSet Name="FK_EmployeeDepartment_DepartmentMaster" Association="Anant_TestModel.FK_EmployeeDepartment_DepartmentMaster">
+      <End Role="DepartmentMaster" EntitySet="DepartmentMasters" />
+      <End Role="EmployeeDepartment" EntitySet="EmployeeDepartments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeDepartment_Employee_EmployeeId" Association="Anant_TestModel.FK_EmployeeDepartment_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="EmployeeDepartment" EntitySet="EmployeeDepartments" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="EmployeeDepartment">
+    <Key>
+      <PropertyRef Name="EmployeeDepartmentId" />
+    </Key>
+    <Property Name="EmployeeDepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentId" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="DepartmentMaster" Relationship="Anant_TestModel.FK_EmployeeDepartment_DepartmentMaster" FromRole="EmployeeDepartment" ToRole="DepartmentMaster" />
+    <NavigationProperty Name="Employee" Relationship="Anant_TestModel.FK_EmployeeDepartment_Employee_EmployeeId" FromRole="EmployeeDepartment" ToRole="Employee" />
+  </EntityType>
+  <Association Name="FK_EmployeeDepartment_DepartmentMaster">
+    <End Type="Anant_TestModel.DepartmentMaster" Role="DepartmentMaster" Multiplicity="1" />
+    <End Type="Anant_TestModel.EmployeeDepartment" Role="EmployeeDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DepartmentMaster">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="EmployeeDepartment">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeDepartment_Employee_EmployeeId">
+    <End Type="Anant_TestModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="Anant_TestModel.EmployeeDepartment" Role="EmployeeDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="EmployeeDepartment">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

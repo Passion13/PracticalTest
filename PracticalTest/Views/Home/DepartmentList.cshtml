@@ -1,0 +1,48 @@
+﻿@model List<PracticalTest.DepartmentMaster>
+
+@{
+    ViewBag.Title = "Department List";
+    Layout = null;
+}
+
+
+<div>
+    
+    @if (Model != null && Model.Count > 0)
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Department Name</th>
+
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.DepartmentName
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Edit", "Department", new { id = item.DepartmentId }) |
+                            <a href="@Url.Action("DeleteDepartment", new { id = item.DepartmentId })" onclick="if (confirm('Do you want to delete selected department?')){return true;}else{event.stopPropagation(); event.preventDefault();};">
+                                Delete
+                            </a>
+
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div>
+            <span>No record(s) found.</span>
+        </div>
+    }
+</div>

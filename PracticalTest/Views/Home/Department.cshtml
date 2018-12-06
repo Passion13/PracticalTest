@@ -1,0 +1,33 @@
+﻿@model PracticalTest.DepartmentMaster
+@{
+    ViewBag.Title = "Department";
+}
+
+<h2>Department</h2>
+
+<div>
+    @using (Ajax.BeginForm("Department", "Home", new AjaxOptions { }))
+    {
+        @Html.HiddenFor(model => model.DepartmentId)
+        <div>
+            <div>
+                <label>Department Name</label>
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.DepartmentName, new { @class = "form-control" })
+            </div>
+            <br />
+            <div>
+
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="reset" value="Cancel" class="btn btn-warning" />
+
+            </div>
+        </div>
+
+    }
+
+</div>
+<div>
+    @Html.Action("DepartmentList","Home")
+</div>
