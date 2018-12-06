@@ -194,7 +194,6 @@
     <Content Include="Content\css\spinner.gif" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
-    <Content Include="Content\select2-bootstrap.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -221,10 +220,6 @@
     <Content Include="PracticalTest.edmx.diagram">
       <DependentUpon>PracticalTest.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\select2-bootstrap.scss" />
-    <Content Include="Content\select2-bootstrap.less" />
-    <Content Include="Content\select2-bootstrap-build.scss" />
-    <Content Include="Content\select2-bootstrap-build.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
